@@ -9,7 +9,7 @@ body {
 }
 
 .main-container {
-  width: 400px;
+  width: 450px;
   background: #fff;
   padding: 20px;
   border: 2px solid #000;
@@ -29,15 +29,34 @@ body {
   text-align: center;
 }
 
-.info-box {
-  border: 1px solid #000;
-  padding: 5px 10px;
+.input-box {
+  width: 60px;
   margin-top: 5px;
+  padding: 5px;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.generate-btn {
+  margin-bottom: 20px;
+  padding: 8px 20px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.generate-btn:hover {
+  background-color: #005f73;
+}
+
+.matrix-info {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 #seatContainer {
   display: grid;
-  grid-template-columns: repeat(5, 40px);
   gap: 10px;
   justify-content: center;
   margin-bottom: 20px;
@@ -69,4 +88,6 @@ body {
 
 .footer .info-box {
   margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid #000;
 }
