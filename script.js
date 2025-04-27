@@ -1,46 +1,40 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #333;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
+let bookedCount = 0;
+const bookedCountSpan = document.getElementById('bookedCount');
+const seatContainer = document.getElementById('seatContainer');
+
+const rows = 5;
+const cols = 5;
+const totalSeats = rows * cols;
+const numberOfBlockedSeats = 5; // You can change this number if you want more/less blocked
+
+let blockedSeats = [];
+
+// Randomly generate blocked seats
+while (blockedSeats.length < numberOfBlockedSeats) {
+  const randomSeat = Math.floor(Math.random() * totalSeats);
+  if (!blockedSeats.includes(randomSeat)) {
+    blockedSeats.push(randomSeat);
+  }
 }
 
-.container {
-  background: #fff;
-  color: #000;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-}
+// Create seat grid
+for (let i = 0; i < totalSeats; i++) {
+  const seat = document.createElement('div');
+  seat.classList.add('seat');
 
-h2 {
-  margin-bottom: 20px;
-}
+  if (blockedSeats.includes(i)) {
+    seat.classList.add('blocked');
+  } else {
+    seat.addEventListener('click', function() {
+      seat.classList.toggle('booked');
+      if (seat.classList.contains('booked')) {
+        bookedCount++;
+      } else {
+        bookedCount--;
+      }
+      bookedCountSpan.textContent = bookedCount;
+    });
+  }
 
-#seatContainer {
-  display: grid;
-  grid-template-columns: repeat(5, 50px);
-  gap: 10px;
-  justify-content: center;
-}
-
-.seat {
-  width: 40px;
-  height: 40px;
-  background-color: limegreen;
-  border: 2px solid #000;
-  cursor: pointer;
-}
-
-.blocked {
-  background-color: red;
-  pointer-events: none;
-}
-
-.booked {
-  background-color: grey;
+  seatContainer.appendChild(seat);
 }
