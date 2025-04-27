@@ -1,72 +1,149 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #333;
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+    background-color: #333;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100vh;
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
 }
 
-.main-container {
-  width: 400px;
-  background: #fff;
-  padding: 20px;
-  border: 2px solid #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.container {
+
+    background-color: white;
+
+    padding: 20px;
+
+    border: 3px solid black;
+
+    width: 500px;
+
+    text-align: center;
+
 }
 
-.info {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.inputs {
+
+    display: flex;
+
+    justify-content: space-around;
+
+    margin-bottom: 20px;
+
+    align-items: center;
+
 }
 
-.info div {
-  text-align: center;
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
 }
 
-.info-box {
-  border: 1px solid #000;
-  padding: 5px 10px;
-  margin-top: 5px;
+.input-group input {
+
+    width: 80px;
+
+    text-align: center;
+
+    padding: 5px;
+
+    margin-top: 5px;
+
+    border: 2px solid gray;
+
+    font-size: 16px;
+
 }
 
-#seatContainer {
-  display: grid;
-  grid-template-columns: repeat(5, 40px);
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
+button#generateBtn {
+
+    padding: 8px 16px;
+
+    font-size: 16px;
+
+    background-color: white;
+
+    border: 2px solid black;
+
+    cursor: pointer;
+
+}
+
+.seat-container {
+
+    display: grid;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
 }
 
 .seat {
-  width: 40px;
-  height: 30px;
-  background-color: limegreen;
-  border: 1px solid #000;
-  cursor: pointer;
+
+    width: 40px;
+
+    height: 30px;
+
+    background-color: limegreen;
+
+    border: 2px solid black;
+
+    cursor: pointer;
+
 }
 
-.blocked {
-  background-color: red;
-  pointer-events: none;
+.seat.blocked {
+
+    background-color: red;
+
+    cursor: not-allowed;
+
 }
 
-.booked {
-  background-color: grey;
+.seat.booked {
+
+    background-color: grey;
+
 }
 
-.footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.booked-info {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
 }
 
-.footer .info-box {
-  margin-left: 10px;
+.booked-info input {
+
+    width: 50px;
+
+    text-align: center;
+
+    border: 2px solid gray;
+
+    padding: 5px;
+
+    font-size: 16px;
+
 }
