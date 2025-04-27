@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seat Booking Interface</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Seat Booking System</h2>
+    <div class="input-area">
+      <label>Seats Matrix (e.g., 5*3): </label>
+      <input type="text" id="matrixInput" placeholder="e.g., 5*3">
+      
+      <label>No. of blocked seats: </label>
+      <input type="number" id="blockedInput" min="0">
+      
+      <button onclick="generateSeats()">Generate Seats</button>
+    </div>
+
+    <div id="seatContainer"></div>
+
+    <div class="count-area">
+      Total no. of seats booked: <span id="bookedCount">0</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+  </html>
