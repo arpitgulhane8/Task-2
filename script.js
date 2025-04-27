@@ -1,73 +1,101 @@
-const seatContainer = document.getElementById('seatContainer');
-const matrixDisplay = document.getElementById('matrixDisplay');
-const blockedSeatsDisplay = document.getElementById('blockedSeatsDisplay');
-const bookedCountDisplay = document.getElementById('bookedCount');
-const footer = document.getElementById('footer');
-const matrixInfo = document.getElementById('matrixInfo');
+const matrixInput = document.getElementById('matrixInput');
 
-const generateBtn = document.getElementById('generateBtn');
-const rowsInput = document.getElementById('rowsInput');
-const colsInput = document.getElementById('colsInput');
 const blockedInput = document.getElementById('blockedInput');
 
-let bookedCount = 0;
+const generateBtn = document.getElementById('generateBtn');
+
+const seatContainer = document.getElementById('seatContainer');
+
+const bookedCount = document.getElementById('bookedCount');
+
+let totalSeats = 0;
+
+let blockedSeatsSet = new Set();
+
+let bookedSeats = 0;
 
 generateBtn.addEventListener('click', () => {
-  seatContainer.innerHTML = "";
-  bookedCount = 0;
-  bookedCountDisplay.textContent = bookedCount;
 
-  const rows = parseInt(rowsInput.value);
-  const cols = parseInt(colsInput.value);
-  const blockedSeatsCount = parseInt(blockedInput.value);
+    const matrixValue = matrixInput.value.trim();
 
-  if (isNaN(rows) || isNaN(cols) || isNaN(blockedSeatsCount) || rows <= 0 || cols <= 0 || blockedSeatsCount < 0) {
-    alert('Please enter valid numbers!');
-    return;
-  }
+    const blockedValue = parseInt(blockedInput.value);
 
-  const totalSeats = rows * cols;
+    if (!/^\d+x\d+$/i.test(matrixValue)) {
 
-  if (blockedSeatsCount > totalSeats) {
-    alert('Blocked seats cannot be more than total seats!');
-    return;
-  }
+        alert("Matrix format should be like '5x3'");
 
-  matrixDisplay.textContent = `${rows} x ${cols}`;
-  blockedSeatsDisplay.textContent = blockedSeatsCount;
+        return;
 
-  matrixInfo.style.display = 'block';
-  footer.style.display = 'flex';
-
-  seatContainer.style.gridTemplateColumns = `repeat(${cols}, 40px)`;
-
-  let blockedSeats = [];
-
-  while (blockedSeats.length < blockedSeatsCount) {
-    const randomSeat = Math.floor(Math.random() * totalSeats);
-    if (!blockedSeats.includes(randomSeat)) {
-      blockedSeats.push(randomSeat);
     }
-  }
 
-  for (let i = 0; i < totalSeats; i++) {
-    const seat = document.createElement('div');
-    seat.classList.add('seat');
+    const [rows, cols] = matrixValue.toLowerCase().split('x').map(Number);
 
-    if (blockedSeats.includes(i)) {
-      seat.classList.add('blocked');
-    } else {
-      seat.addEventListener('click', function() {
-        seat.classList.toggle('booked');
-        if (seat.classList.contains('booked')) {
-          bookedCount++;
+    totalSeats = rows * cols;
+
+    if (isNaN(blockedValue) || blockedValue < 0 || blockedValue > totalSeats) {
+
+        alert("Blocked seats must be a number between 0 and total seats.");
+
+        return;
+
+    }
+
+    seatContainer.innerHTML = '';
+
+    seatContainer.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
+
+    blockedSeatsSet.clear();
+
+    bookedSeats = 0;
+
+    bookedCount.value = bookedSeats;
+
+    // Randomly select blocked seats
+
+    while (blockedSeatsSet.size < blockedValue) {
+
+        const randomSeat = Math.floor(Math.random() * totalSeats);
+
+        blockedSeatsSet.add(randomSeat);
+
+    }
+
+    for (let i = 0; i < totalSeats; i++) {
+
+        const seat = document.createElement('div');
+
+        seat.classList.add('seat');
+
+        if (blockedSeatsSet.has(i)) {
+
+            seat.classList.add('blocked');
+
         } else {
-          bookedCount--;
+
+            seat.addEventListener('click', () => {
+
+                if (seat.classList.contains('booked')) {
+
+                    seat.classList.remove('booked');
+
+                    bookedSeats--;
+
+                } else {
+
+                    seat.classList.add('booked');
+
+                    bookedSeats++;
+
+                }
+
+                bookedCount.value = bookedSeats;
+
+            });
+
         }
-        bookedCountDisplay.textContent = bookedCount;
-      });
+
+        seatContainer.appendChild(seat);
+
     }
 
-    seatContainer.appendChild(seat);
-  }
 });
