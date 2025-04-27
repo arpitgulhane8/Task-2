@@ -1,65 +1,46 @@
-let bookedCount = 0;
-let totalSeats = 0;
-let blockedSeats = [];
+body {
+  font-family: Arial, sans-serif;
+  background: #333;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
 
-function generateSeats() {
-  const matrixInput = document.getElementById('matrixInput').value.trim();
-  const blockedInput = parseInt(document.getElementById('blockedInput').value.trim());
-  const seatContainer = document.getElementById('seatContainer');
-  const bookedCountSpan = document.getElementById('bookedCount');
+.container {
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
 
-  seatContainer.innerHTML = '';
-  bookedCount = 0;
-  bookedCountSpan.textContent = bookedCount;
+h2 {
+  margin-bottom: 20px;
+}
 
-  // Validate Matrix Input
-  const matrixMatch = matrixInput.match(/^(\d+)\s*[xX]\s*(\d+)$/);
-  if (!matrixMatch) {
-    alert('Matrix input must be in NxM format, e.g., 5x3');
-    return;
-  }
+#seatContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 50px);
+  gap: 10px;
+  justify-content: center;
+}
 
-  const rows = parseInt(matrixMatch[1]);
-  const cols = parseInt(matrixMatch[2]);
-  totalSeats = rows * cols;
+.seat {
+  width: 40px;
+  height: 40px;
+  background-color: limegreen;
+  border: 2px solid #000;
+  cursor: pointer;
+}
 
-  if (blockedInput > totalSeats) {
-    alert('Blocked seats cannot exceed total seats.');
-    return;
-  }
+.blocked {
+  background-color: red;
+  pointer-events: none;
+}
 
-  // Set Grid Template
-  seatContainer.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
-
-  // Generate random blocked seats
-  blockedSeats = [];
-  while (blockedSeats.length < blockedInput) {
-    const randomSeat = Math.floor(Math.random() * totalSeats);
-    if (!blockedSeats.includes(randomSeat)) {
-      blockedSeats.push(randomSeat);
-    }
-  }
-
-  // Create seats
-  for (let i = 0; i < totalSeats; i++) {
-    const seat = document.createElement('div');
-    seat.classList.add('seat');
-
-    if (blockedSeats.includes(i)) {
-      seat.classList.add('blocked');
-    } else {
-      seat.addEventListener('click', function() {
-        seat.classList.toggle('booked');
-
-        if (seat.classList.contains('booked')) {
-          bookedCount++;
-        } else {
-          bookedCount--;
-        }
-        bookedCountSpan.textContent = bookedCount;
-      });
-    }
-
-    seatContainer.appendChild(seat);
-  }
+.booked {
+  background-color: grey;
 }
