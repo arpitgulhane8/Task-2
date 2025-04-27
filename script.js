@@ -1,23 +1,27 @@
-let bookedCount = 0;
-const bookedCountSpan = document.getElementById('bookedCount');
-const seatContainer = document.getElementById('seatContainer');
+const matrixRows = 5;
+const matrixCols = 3;
+const blockedSeatCount = 3;
 
-const rows = 5;
-const cols = 5;
-const totalSeats = rows * cols;
-const numberOfBlockedSeats = 5; // You can change this number if you want more/less blocked
+const seatContainer = document.getElementById('seatContainer');
+const matrixDisplay = document.getElementById('matrixDisplay');
+const blockedSeatsDisplay = document.getElementById('blockedSeatsDisplay');
+const bookedCountDisplay = document.getElementById('bookedCount');
+
+matrixDisplay.textContent = `${matrixRows} x ${matrixCols}`;
+blockedSeatsDisplay.textContent = blockedSeatCount;
+
+let bookedCount = 0;
+const totalSeats = matrixRows * matrixCols;
 
 let blockedSeats = [];
 
-// Randomly generate blocked seats
-while (blockedSeats.length < numberOfBlockedSeats) {
+while (blockedSeats.length < blockedSeatCount) {
   const randomSeat = Math.floor(Math.random() * totalSeats);
   if (!blockedSeats.includes(randomSeat)) {
     blockedSeats.push(randomSeat);
   }
 }
 
-// Create seat grid
 for (let i = 0; i < totalSeats; i++) {
   const seat = document.createElement('div');
   seat.classList.add('seat');
@@ -32,7 +36,7 @@ for (let i = 0; i < totalSeats; i++) {
       } else {
         bookedCount--;
       }
-      bookedCountSpan.textContent = bookedCount;
+      bookedCountDisplay.textContent = bookedCount;
     });
   }
 
