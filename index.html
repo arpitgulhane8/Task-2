@@ -7,36 +7,23 @@
 </head>
 <body>
   <div class="main-container">
-    
     <div class="info">
       <div>
-        Rows:
-        <input type="number" id="rowsInput" class="input-box" min="1">
+        Seats Matrix
+        <div class="info-box" id="matrixDisplay">5 x 3</div>
       </div>
       <div>
-        Columns:
-        <input type="number" id="colsInput" class="input-box" min="1">
+        No. of blocked seats :
+        <div class="info-box" id="blockedSeatsDisplay">3</div>
       </div>
-      <div>
-        Blocked Seats:
-        <input type="number" id="blockedInput" class="input-box" min="0">
-      </div>
-    </div>
-
-    <button id="generateBtn" class="generate-btn">Generate Seats</button>
-
-    <div class="matrix-info" id="matrixInfo" style="display:none;">
-      <div>Seats Matrix: <span id="matrixDisplay"></span></div>
-      <div>No. of blocked seats: <span id="blockedSeatsDisplay"></span></div>
     </div>
 
     <div id="seatContainer"></div>
 
-    <div class="footer" id="footer" style="display:none;">
-      Total no. of seats booked:
+    <div class="footer">
+      Total no. of seats booked :
       <div class="info-box" id="bookedCount">0</div>
     </div>
-
   </div>
 
   <script src="script.js"></script>
