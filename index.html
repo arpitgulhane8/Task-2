@@ -6,10 +6,24 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Total no. of seats booked: <span id="bookedCount">0</span></h2>
+  <div class="main-container">
+    <div class="info">
+      <div>
+        Seats Matrix
+        <div class="info-box" id="matrixDisplay">5 x 3</div>
+      </div>
+      <div>
+        No. of blocked seats :
+        <div class="info-box" id="blockedSeatsDisplay">3</div>
+      </div>
+    </div>
 
     <div id="seatContainer"></div>
+
+    <div class="footer">
+      Total no. of seats booked :
+      <div class="info-box" id="bookedCount">0</div>
+    </div>
   </div>
 
   <script src="script.js"></script>
